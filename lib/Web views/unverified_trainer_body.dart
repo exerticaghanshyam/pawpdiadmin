@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -54,22 +55,35 @@ class _UnVerifiedTrainerBodyState extends State<UnVerifiedTrainerBody> {
                       height: double.maxFinite,
                       width: 400,
                       child: Scrollbar(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const UnverifyUser()));
-                          },
-                          child: ListView.builder(
-                              itemCount: snapshot.data?.docs.length,
-                              controller: _scrollController,
-                              itemBuilder: (context, index) {
-                                dynamic val = snapshot.data?.docs[index];
-                                String imageUrl =
-                                    val['profile_image_url'].toString();
-                                if (_searchKeyword.isEmpty) {
-                                  return ProfessionalCard
+                        child: ListView.builder(
+                            itemCount: snapshot.data?.docs.length,
+                            controller: _scrollController,
+                            itemBuilder: (context, index) {
+                              dynamic val = snapshot.data?.docs[index];
+                              String imageUrl =
+                                  val['profile_image_url'].toString();
+                              if (_searchKeyword.isEmpty) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => UnverifyUser(
+                                                  name: val['name'],
+                                                  professionalType:
+                                                      val['professionalType'],
+                                                  address: val['address'],
+                                                  idImageUrl: imageUrl,
+                                                  isIdVerified:
+                                                      val['isIdVerified'],
+                                                  uid: val['uid'],
+                                                  isIdRejected:
+                                                      val['isIdRejected'],
+                                                  phone: val['phone'],
+                                                  email: val['email'],
+                                                )));
+                                  },
+                                  child: ProfessionalCard
                                       .unVerifiedProfessionalCard(
                                     context,
                                     val['name'],
@@ -87,46 +101,45 @@ class _UnVerifiedTrainerBodyState extends State<UnVerifiedTrainerBody> {
                                     idImageUrl: val['idImageUrl'] ?? '',
                                     professionalImageUrl:
                                         val['professionalImageUrl'] ?? '',
-                                  );
-                                } else if ((val['name']
-                                        .toString()
-                                        .toLowerCase()
-                                        .contains(
-                                            _searchKeyword.toLowerCase()) ||
-                                    (val['email']
-                                        .toString()
-                                        .toLowerCase()
-                                        .contains(
-                                            _searchKeyword.toLowerCase())) ||
-                                    (val['professionalType'])
-                                        .toString()
-                                        .toLowerCase()
-                                        .contains(
-                                            _searchKeyword.toLowerCase()))) {
-                                  return ProfessionalCard
-                                      .unVerifiedProfessionalCard(
-                                    context,
-                                    val['name'],
-                                    val['professionalType'],
-                                    val['address'],
-                                    imageUrl,
-                                    val['isIdVerified'],
-                                    val['uid'],
-                                    val['isIdRejected'],
-                                    val['isDocVerified'],
-                                    val['isDocRejected'],
-                                    val['isProfessionalVerified'],
-                                    phone: val['phone'],
-                                    email: val['email'],
-                                    idImageUrl: val['idImageUrl'] ?? '',
-                                    professionalImageUrl:
-                                        val['professionalImageUrl'] ?? '',
-                                  );
-                                } else {
-                                  return const SizedBox();
-                                }
-                              }),
-                        ),
+                                  ),
+                                );
+                              } else if ((val['name']
+                                      .toString()
+                                      .toLowerCase()
+                                      .contains(_searchKeyword.toLowerCase()) ||
+                                  (val['email']
+                                      .toString()
+                                      .toLowerCase()
+                                      .contains(
+                                          _searchKeyword.toLowerCase())) ||
+                                  (val['professionalType'])
+                                      .toString()
+                                      .toLowerCase()
+                                      .contains(
+                                          _searchKeyword.toLowerCase()))) {
+                                return ProfessionalCard
+                                    .unVerifiedProfessionalCard(
+                                  context,
+                                  val['name'],
+                                  val['professionalType'],
+                                  val['address'],
+                                  imageUrl,
+                                  val['isIdVerified'],
+                                  val['uid'],
+                                  val['isIdRejected'],
+                                  val['isDocVerified'],
+                                  val['isDocRejected'],
+                                  val['isProfessionalVerified'],
+                                  phone: val['phone'],
+                                  email: val['email'],
+                                  idImageUrl: val['idImageUrl'] ?? '',
+                                  professionalImageUrl:
+                                      val['professionalImageUrl'] ?? '',
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            }),
                       ),
                     );
                   }

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:petfindernetwork/Web%20pet/unverified_found_pet_body.dart';
 import 'package:petfindernetwork/Web%20pet/unverified_lost_pet_body.dart';
 import 'package:petfindernetwork/Web%20views/all_users.dart';
+import 'package:petfindernetwork/Web%20views/found_pet_screen.dart';
+import 'package:petfindernetwork/Web%20views/lost_pet_screen.dart';
 import 'package:petfindernetwork/Web%20views/pet_walker_screen.dart';
 import 'package:petfindernetwork/Web%20views/professional_screen.dart';
 import 'package:petfindernetwork/Web%20views/trainer_screen.dart';
@@ -564,11 +566,11 @@ class _WebDashboardScreenState extends State<WebDashboardScreen> {
           professionalType: 'Pet Walker',
         );
       case 4:
-        return const UnverifiedLostPetBody();
+        return const UnverifiedPetWalkerBody(professionalType: 'Groomer');
       case 5:
-        return const UnVerifiedFoundPetBody();
+        return const UnverifiedLostPetBody();
       case 6:
-        return const UnverifiedProfessionalBody();
+        return const UnVerifiedFoundPetBody();
       case 7:
         return const UnVerifiedTrainerBody();
       default:
