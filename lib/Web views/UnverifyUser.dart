@@ -408,7 +408,7 @@ class _UnverifyUserState extends State<UnverifyUser> {
               const Row(
                 children: [
                   Icon(
-                    Icons.verified_user_outlined,
+                    Icons.email,
                     // Icons.privacy_tip_outlined,
                     color: Colors.black87,
                   ),
@@ -441,7 +441,7 @@ class _UnverifyUserState extends State<UnverifyUser> {
               const Row(
                 children: [
                   Icon(
-                    Icons.verified_user_outlined,
+                    Icons.phone,
                     // Icons.privacy_tip_outlined,
                     color: Colors.black87,
                   ),
@@ -465,6 +465,7 @@ class _UnverifyUserState extends State<UnverifyUser> {
             ],
           ),
         ),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
